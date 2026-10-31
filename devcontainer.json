@@ -1,0 +1,20 @@
+{
+  "name": "Codex CLI Learning (Ubuntu 24.04)",
+  "dockerComposeFile": "../compose.yaml",
+  "service": "codex",
+  "workspaceFolder": "/workspaces/codex-learning/workspace",
+  "remoteUser": "codex",
+  "shutdownAction": "stopCompose",
+  "overrideCommand": false,
+  "postCreateCommand": "codex --version && node --version && npm --version && git --version",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
+  }
+}

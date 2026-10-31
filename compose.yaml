@@ -1,0 +1,32 @@
+name: codex-learning
+
+services:
+  codex:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    user: codex
+    working_dir: /workspaces/codex-learning/workspace
+    stdin_open: true
+    tty: true
+    environment:
+      CODEX_HOME: /home/codex/.codex
+      TZ: Asia/Tokyo
+    volumes:
+      # VS Code が構成ファイルを認識できるよう、プロジェクト全体を共有。
+      - type: bind
+        source: .
+        target: /workspaces/codex-learning
+      # ログイン情報や Codex 設定はホスト側のソースと分離して保存。
+      - type: volume
+        source: codex-home
+        target: /home/codex/.codex
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    command: ["sleep", "infinity"]
+
+volumes:
+  codex-home:
